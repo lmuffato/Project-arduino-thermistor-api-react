@@ -179,7 +179,7 @@ for (n=0; n< 5; n++)
 }
 
 // Soma as amostras começando da amostra nº zero, somando a próxima amostra até que o número da amostra seja o número 5.
-//for (n=0; n< 5; n++){soma += amostra[n];}
+for (n=0; n< 5; n++){soma += amostra[n];}
 
 // Faz a média aritimética das amostras somando o valor das cinco amostras e dividindo pelo número de amostras coletadas. 
 //Vm = (soma/5);
