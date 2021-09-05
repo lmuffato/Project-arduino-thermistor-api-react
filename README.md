@@ -93,8 +93,8 @@ T: Termistor (sensor de temperatura);
 R: Resistor de 100k Ohm;
 GND: Referência de tensão 0;
   ```
-⚠️ `ATENÇÃO`: Como Resistência Nominal do Thermistor é de 100k ohm, recomenda-se
-utilizar um resistor de 100k ohm para formar o divisor de tensão. O termo Resistênica Nominal
+⚠️ `ATENÇÃO`: Como a Resistência Nominal do Thermistor é de 100k ohm, recomenda-se
+utilizar um resistor de 100k ohm para formar o divisor de tensão. O termo Resistência Nominal
 será explicado mais abaixo.
 
 O interesse nesse passo, é descobrir o valor da resistênica do termistor, e para isso será
@@ -138,6 +138,7 @@ Logo:
 Rt = (Vi * Rr)/Fv - Rr
   ```
 ## 3 - Determinado a temperatura do termistor pela Equação do Fator Beta (β)
+
   ```
 1/T = 1/Tn + 1/β * ln(Rt/Rn)
   ```
@@ -178,8 +179,8 @@ Rn = 100k Ohms;
 β = 4400;
   ```
 ⚠️ `IMPORTANTE`:
-* Como o valor de `Tn` foi informado na documentação esté em `graus Celsius`, é necessário converte-lo na `escala kelvin`, somando 273.15.
-* Como a equação resulta na temperatura (`T`) na `escla kelvin`, para converte-la em `graus Celsius`, basta subtrair 273.15.
+* Como o valor de `Tn` foi informado na documentação em `graus Celsius`, é necessário converte-lo na `escala kelvin`, somando 273.15.
+* Como a equação resulta na `temperatura` na `escala kelvin`, para converte-la em `graus Celsius`, basta subtrair 273.15.
 
 Logo a equação final fica:
   ```
@@ -190,24 +191,26 @@ T = ( β * Tn + 273.15 )/( β + (Tn + 273.15 ) * ln( Rt/Rn )) - 273.15;
 
 ⚠️ Não é necessário utilizar o display de LCD para fazer a API funcionar.
 
-No projeto, foi utilizado um displau de LCD 16x2 para verificar o temperatura sem a
-necessidade de ligar o arduino no computador. Utilizando o monitor serial, disponível no próprio software do Arduino (IDE).
+No projeto, foi utilizado um display de LCD 16x2 para verificar a temperatura sem a
+necessidade de ligar o arduino no computador.
 
-Também é possível acessar a porta serial pelo terminual do linux pelo comando:
+Os dados podem ser exportados e lidos no monitor serial, disponível no próprio software do Arduino (IDE), ou diretamente pelo terminual do linux pelo comando:
 ```
 cat /dev/ttyACM0
 ```
 
 Caso tenha interesse em utilizar o display, aqui está o esquema dos pinos
-ligados nas porta do Arduino.
+ligados no Arduino.
 
   ```
 DYSPLAY |  VSS | VVD | V0 | RS | RW | E | D0 | D1 | D2 | D3 | D4 | D5 | D6 | D7 | A | K |
 ARDUINO |  GND | 5v  | Pt | D7 | GND| D6|    |    |    |    | D5 | D4 | D3 | D2 | 5v|GND|           
   ```
 
+### ⚠️ Essa siglas estão escritas sobre os pinos, tanto na placa do arduino quanto na placa do display.
+
 O pino Pt do Display é ligado em um potenciômetro, para controlar o contraste da tela.
-A ligação do potenciômetro é feita conforme a ligação abaixo:
+A ligação do potenciômetro é feita conforme o esquema abaixo:
 
   ```
   |--Potenciômetro--|
@@ -340,25 +343,25 @@ Se tudo deu certo, o arduino já está medindo a temperatura correta e transmiti
 
 ## BASE DA API
 
-### 1 - Criar o diretório.
+### 1 - Criar o diretório:
 ```
 mkdir arduino-api;
 cd arduino-api;
 ```
-### 2 - Instalar o npm.
+### 2 - Instalar o npm:
 ```
 npm init -y
 ```
-### 3 - Instalar o express.
+### 3 - Instalar o express:
 ```
 npm i express
 ```
-### 4 - Criar o arquivo que receb e o código da api.
+### 4 - Criar o arquivo que recebe e o código da API:
 ```
 touch apiArduino.js
 ```
 
-### 5. Copiar o exempplo abaixo.
+### 5. Copie e cole o código do exemplo abaixo para testar:
 ```
 const express = require('express');
 const app = express();
@@ -374,25 +377,25 @@ function handleHelloWorldRequest(req, res) {
 }
 ```
 
-### 6 - Executar o da API.
+### 6 - Executar a API:
 ```
 node apiArduino.js
 ```
 
-### 7 - Acessar a API pelo navegador, e ver se as informações chegaram corretamente, conforme a url abaixo.
+### 7 - Acessar a API pelo navegador, e ver se as informações chegaram corretamente, conforme a url abaixo:
 ```
 http://localhost:3001/arduino. 
 ```
-### 8 - Parece encerrar a transmissão da API, basta aperta as teclas abaixo no terminal.
+### 8 - Para encerrar a transmissão da API, basta aperta as teclas abaixo no terminal:
 ```
 Ctrl + C
 ```
 
-## PERMITINDO ACESSO AOS DADOS DA API
+## PERMITINDO O ACESSO AOS DADOS DA API
 
 ⚠️ `Observação`: Para uma aplicação back-end receber requisições de uma aplicação front-end, ou qualquer outra aplicação, é preciso instalar o módulo `cors` que libera o acesso da nossa API para outras aplicações.
 
-### 1 - Instalar o cors
+### 1 - Instalar o pacote cors
 ```
 npm i cors
 ```
@@ -471,7 +474,7 @@ No caso do arduino trasmitir mais de um dado por vez, é possível especificar u
 
 Esse caractere deve ser especificado no código feito na IDE do Arduino.
 
-## ⚠️ `ATENÇÃO`: Não carregue dados na placa do Arduino se a API estiver trasmitido dados. Isso pode travar a placa. Para caregar novos dados, feche a API primeiro, apertando `Ctrl + C` no terminal.
+## ⚠️ `ATENÇÃO`: Não faça o upload de novos códigos na placa do Arduino se a API estiver trasmitido dados. Isso pode travar a placa. Para caregar novos dados, feche a API primeiro, apertando `Ctrl + C` no terminal.
 
 # CONSUMINDO OS DADOS NO REACT
 
@@ -489,7 +492,7 @@ cd arduino-react;
 npm start
 ```
 
-### 3 - Recebendo os dados da api:
+### 3 - Recebendo os dados da API:
 No código abaixo, os dados estão sendo importados por uma função assincrona, e atualizados no useEffect a cada um segundo, para não sobrecarregar a aplicação com dezenas de chamadas por segundo.
 ```
 import React, { useState, useEffect } from 'react';
@@ -523,7 +526,7 @@ export default function TemperatureFetch() {
 }
 ```
 ### 4 - Alterando a cor do CSS de acordo com a temperatura:
-O modelo de cores `hsl(0, 100%, 50%)` permite uma mudança da cor da alteração do primeiro dígito de maneira linear, indo de 0 (vermelho) a 345 (rosa). Porém, como a temperatura cresce a medida que fica mais quente, não faz muito sentido a cor inicial ser a vermelha e a cor final ser tons roxo.
+O modelo de cores `hsl(0, 100%, 50%)` permite a mudança da cor pela alteração do primeiro dígito do padrão. Essa alterão segue um modelo linear, indo de 0 (vermelho) a 345 (rosa). Porém, como a temperatura cresce a medida que fica mais quente, não faz muito sentido a cor inicial ser a vermelha e a cor final ser tons roxo.
 
 Para que o esquema de cores vá das cores mais frias para as mais quentes de acordo com o aumento da temperatura, é necessário inverter a escala.
 
@@ -600,7 +603,9 @@ A maioria dos sensores analógicos disponíveis no mercado, podem ser controlado
 
 No caso, se o termistor foi substituido por um sensor de luz, ao invés de utilizar a Equação do Fator Beta, será outra equação, no caso uma equação linear, e novamente, com os coeficientes fornecidos pelo fabricante.
 
-Sensor de luminosidade, sensor de umidade, sensor de cores, sensor de som, giroscópio... E por que não expandir mais, e salvar esse dados em um mongoDB ou SQL?
+Sensor de luminosidade, sensor de umidade, sensor de cores, sensor de som, giroscópio, sensor de movimento... São diversas maneiras que o computador pode se comunicar e extrair informações do mundo real.
+
+E por que não expandir mais, e salvar esse dados em um mongodb ou SQL?
 
 ## `Pense nas possibilidades!`
 
