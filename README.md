@@ -1,9 +1,11 @@
 
 ---
 
-# INTEGRAÇÃO DOS DADOS DO TERMISTOR COM O API E O REACT
+# INTEGRAÇÃO DA API COM OS DADOS DO ARDUINO FORNECIDOS PELO TERMISTOR
 
 Código Desenvolvido por `Lucas Muffato`.
+
+![image](./arduino-gif.gif)
 
 ### MATERIAIS
 
@@ -13,6 +15,12 @@ Código Desenvolvido por `Lucas Muffato`.
 * 1 Resistor de 100k ou 10k ohms;
 * 1 Display LCD 16x2 ( OPCIONAL ).
 
+### O QUE SE ESPERA FAZER?
+
+Se tudo der certo, a informação da temperatura ambiente vai percorrer todo o caminho abaixo até chegar no CSS:
+```
+Temperatura ambiente -> Thermistor -> Divisor de Tensão -> Arduino -> Porta Serial do PC -> API Node Express -> React -> CSS
+```
 ### CONSIDERAÇÕES INICIAIS
 
 Esse códio é para os termistores `NTC`, ou seja, os resistores que diminuem a
@@ -32,6 +40,14 @@ O termistor usado foi um Termistor NTC, `Modelo TTC 104` da marca TSK.
 A documentação é facilmente encontrada na internet.
 
 Em caso de dúvida, a especificação do modelo do termistor vem escrito no componente.
+
+![image](./arduino-code/NTC-detalhe.jpg)
+
+#### O `fio vermelho` está conectado a saída de `5 volts`;
+#### O `fio preto` está conectado a saída `GND`;
+#### O `fio amarelo` está conectado a `porta analógica A0`.
+
+A medida que for prosseguindo no texto abaixo, isso fará mais sentido e irá facilitar o entendimento.
 
 ---
 
@@ -575,3 +591,17 @@ export default function TemperatureFetch() {
   );
 }
 ```
+
+# CONSIDERAÇÕES FINAIS
+
+## Isso só se aplica a temperatura? Esse conhecimento é útil?
+
+A maioria dos sensores analógicos disponíveis no mercado, podem ser controlados e intepretados usando os conceitos utilizados aqui, como o divisor de tensão.
+
+No caso, se o termistor foi substituido por um sensor de luz, ao invés de utilizar a Equação do Fator Beta, será outra equação, no caso uma equação linear, e novamente, com os coeficientes fornecidos pelo fabricante.
+
+Sensor de luminosidade, sensor de umidade, sensor de cores, sensor de som, giroscópio... E por que não expandir mais, e salvar esse dados em um mongoDB ou SQL?
+
+## `Pense nas possibilidades!`
+
+
