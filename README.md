@@ -15,6 +15,10 @@ Código Desenvolvido por `Lucas Muffato`.
 * 1 Resistor de 100k ou 10k ohms;
 * 1 Display LCD 16x2 ( OPCIONAL ).
 
+### LIGAÇÃO ENTRE OS COMPONENTES:
+
+A ligação entre os componentes pode ser feita por `conectores macho/fêmea`, `protoboard` ou `solda de estanho`. No caso de usar ligação por solda (a que foi utilizada no proejto), recomendo usar óculos (de grau ou de proteção), para o caso de algum fragmento de solda ser laçando contra os olhos.
+
 ### O QUE SE ESPERA FAZER?
 
 Se tudo der certo, a informação da temperatura ambiente vai percorrer todo o caminho abaixo até chegar no CSS:
@@ -233,7 +237,7 @@ Se as ligações entre os componentes foram feitas conforme descrito acima, pode
 ```
 #include <LiquidCrystal.h> // Carrega A biblioteca do Display de LCD
 
-// Determinar quais pinos digitais da placa do Arduino serão usados
+// Determinar quais pinos das portas digitais da placa do Arduino serão usados
 LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
 
 // Carrega as configurações que serão executadas apenas uma vez
