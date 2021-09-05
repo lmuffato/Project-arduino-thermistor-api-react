@@ -64,9 +64,9 @@ Vi/Vf = 1023/Pa
   ```
 Onde:
   ```
-Vi = Tensão inicial 5 volts;\n
-Vf = Tensão final aplicada na porta anlógica;\n
-Pa = Valor recebido na porta analógica;\n
+Vi = Tensão inicial 5 volts;
+Vf = Tensão final aplicada na porta anlógica;
+Pa = Valor recebido na porta analógica;
   ```
 Logo, o valor de Vf pode ser obtido por:
   ```
